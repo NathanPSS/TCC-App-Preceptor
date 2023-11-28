@@ -81,8 +81,8 @@ class _LoginFormState extends State<LoginForm> {
               alignment: Alignment.bottomRight,
               child: OutlinedButton(
                   onPressed: () {
-                    setToken(_usernameFieldController.text, _passwordFieldController.text);
-                    Navigator.of(context).push(kcreateRoute(HomeScreen()));
+                    setToken(_usernameFieldController.text, _passwordFieldController.text)
+                        .then((value) => Navigator.of(context).push(kcreateRoute(HomeScreen())));
                   },
                   child: const Text('Entrar')),
             )
