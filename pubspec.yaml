@@ -70,8 +70,7 @@ flutter:
     - .env
     - lib/assets/writing.png
     - lib/assets/writing_light.png
-    - lib/assets/signature-with-a-pen.png
-    - lib/assets/signature-with-a-pen_black.png
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

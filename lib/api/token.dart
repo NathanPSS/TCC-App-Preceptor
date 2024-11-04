@@ -7,7 +7,7 @@ import 'dart:convert';
 import '../config/storage.dart';
 
 
-Future<void> setToken(String username,String password) async {
+Future<bool> setToken(String username,String password) async {
   final url = Uri.parse(
     '${dotenv.env['API_BASE_URL']!}/preceptor/auth');
   final response = await http.post(
@@ -19,11 +19,10 @@ Future<void> setToken(String username,String password) async {
   );
   print(response.statusCode);
   if (response.statusCode == 200) {
-    print("Ok");
     await storage.write(key: "hujb_preceptor_jwt_token", value: response.body);
-  } else {
-    debugPrint('Failed to send data');
+    return true;
   }
+  return false;
 }
 
 Future<bool> hasValidToken() async {

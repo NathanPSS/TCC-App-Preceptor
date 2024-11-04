@@ -81,8 +81,23 @@ class _LoginFormState extends State<LoginForm> {
               alignment: Alignment.bottomRight,
               child: OutlinedButton(
                   onPressed: () {
-                    setToken(_usernameFieldController.text, _passwordFieldController.text)
-                        .then((value) => Navigator.of(context).push(kcreateRoute(HomeScreen())));
+                    setToken(_usernameFieldController.text, _passwordFieldController.text).then((value) {
+                      _usernameFieldController.text = '';
+                      _passwordFieldController.text = '';
+                      if(value){
+                        Navigator.of(context).push(kcreateRoute(HomeScreen()));
+                      } else {
+                        showDialog(context: context, builder: (BuildContext context) {
+                          return Dialog(
+                            child: Container(
+                              padding: EdgeInsets.all(12),
+                              height: 184,
+                              child: Center(child: Text("Ocorreu um erro tente novamente mais tarde",style: TextStyle(fontSize: 18),)),
+                            ),
+                          );
+                        },);
+                      }
+                    });
                   },
                   child: const Text('Entrar')),
             )

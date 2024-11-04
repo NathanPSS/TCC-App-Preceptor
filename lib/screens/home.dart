@@ -7,6 +7,7 @@ import 'package:hujb_preceptor/api/registries.dart';
 import 'package:hujb_preceptor/providers/registry.dart';
 import 'package:hujb_preceptor/widgets/registry.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../config/brightness_mode.dart';
 import '../global/dimensions_device.dart';
 import 'config.dart';
@@ -70,23 +71,18 @@ class HomeScreen extends ConsumerWidget {
             debugPrint(ref.watch(allRegistriesState.notifier).getState().length.toString());
             showDialog(context: context, builder: (BuildContext context) {
               return  AlertDialog(
-                title: Text("Deseja Assinar ?"),
+                title: Text("Deseja Assinar todos os Registros?"),
                 actions: [
                   TextButton(onPressed: (){
-                  singAllRegistries();
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => HomeScreen()));
+                  singAllRegistries().then((value) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => HomeScreen())));
                   }, child: Text("Confirmar"))
                 ],
                 );
             });
           },
            shape:const CircleBorder(),
-          child: SizedBox(
-            width: 32,
-            height: 32,
-            child: (Theme.of(context).brightness == Brightness.light) ? Image.asset("lib/assets/signature-with-a-pen_black.png") : Image.asset("lib/assets/signature-with-a-pen.png"),
+          child:  (Theme.of(context).brightness == Brightness.light) ? Icon(MdiIcons.fileSign,color: Colors.black,size: 32,) : Icon(MdiIcons.fileSign,color: Colors.white,size: 32,),
           )
-        ),
       ),
       body: Consumer(builder: (BuildContext context, WidgetRef ref, Widget? child) {
         if(ref.watch(allRegistriesState.notifier).getState() == null){
